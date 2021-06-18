@@ -1,0 +1,189 @@
+body {
+    background-color: #001a4900;
+    color: aliceblue;
+    font-family: monospace;
+    -webkit-app-region: drag;
+}
+
+.main_container {
+    border-radius: 15px;
+    font-size: xx-large;
+    background-color: #001a49;
+}
+
+.menu {
+    margin-top: 0px;
+    top: 0px;
+    display: flex;
+    padding: 0px;
+    background-color: #2E2149;
+    max-height: 20px;
+    border-radius: 15px 15px 0px 0px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon {
+    background-image: url("assets/icon.png");
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+}
+
+.action_buttons {
+    margin-top: 0px;
+    top: 0px;
+    padding: 0px;
+    display: flex;
+}
+
+.close {
+    border-radius: 0px 15px 0px 0px;
+    width: 40px;
+    height: 20px;
+    border: none;
+    background-color: #FF7474;
+    color: white;
+    font-weight: bolder;
+    top: 0px;
+    margin-top: 0px;
+    -webkit-app-region: no-drag;
+}
+
+.close:hover {
+    background-color: #ff2d2d;
+}
+
+.minimise {
+    border-radius: 0px 0px 0px 0px;
+    width: 40px;
+    height: 20px;
+    border: none;
+    background-color: #4A3772;
+    color: white;
+    font-weight: bolder;
+    -webkit-app-region: no-drag;
+}
+
+.minimise:hover {
+    background-color: #321570;
+}
+
+.holding_container {
+    padding: .8rem;
+    -webkit-app-region: no-drag;
+}
+
+.container {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tool_container {
+    padding: 0px;
+    font-size: large;
+}
+
+.tool_row {
+    margin-top: .5rem;
+}
+
+.screens {
+    background-color: #000817;
+    color: aliceblue;
+    width: 20rem;
+    height: 1.5rem;
+    border-radius: .3rem;
+    outline: none;
+    border: none;
+    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+.record {
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: red;
+    border-radius: 100rem;
+    border-color: black;
+    border-width: .2rem;
+    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.record-ing {
+    height: 1.3rem;
+    width: 1.3rem;
+    background-color: red;
+    border-radius: 0rem;
+    border-color: black;
+    border-width: .2rem;
+    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.audio {
+    height: 1.5rem;
+    width: 1.5rem;
+    background-image: url("assets/audion_icon.png");
+    background-size: cover;
+    border-radius: 100rem;
+    border-color: black;
+    border-width: .2rem;
+    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.audio-disable {
+    height: 1.5rem;
+    width: 1.5rem;
+    background-image: url("assets/audion_icon_disable.png");
+    background-size: cover;
+    border-radius: 100rem;
+    border-color: rgb(60, 60, 60);
+    border-width: .2rem;
+    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.my_info {
+    font-size: large;
+    text-align: right;
+}
+
+.github {
+    background-image: url("assets/github.png");
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    background-color: #001a4900;
+    border: none;
+    cursor: pointer;
+}
+
+.insta {
+    background-image: url("assets/instagram.png");
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    background-color: #001a4900;
+    border: none;
+    cursor: pointer;
+}
+
+.linked {
+    background-image: url("assets/linkedin.png");
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    background-color: #001a4900;
+    border: none;
+    cursor: pointer;
+}
