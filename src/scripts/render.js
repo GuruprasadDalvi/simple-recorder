@@ -1,37 +1,35 @@
+//Imports
 const { remote } = require('electron');
-const { shell } = require('electron');
 const { desktopCapturer } = require('electron');
 const { dialog, Menu } = remote;
 const { writeFile } = require('fs');
 
-var loaded = false;
+//Variable
 const videoSelectBtn = document.getElementById('videoSelectBtn');
-videoSelectBtn.onclick = getVideoSources;
 var withAudio = false;
 var recording = false;
-
 let mediaRecorder;
-const recordedChunks = [];
-const recordBtnElem = document.getElementById("recordBtn")
+const options = { mimeType: 'video/webm; codecs=vp9' };
+let recordedChunks = [];
+const recordBtnElem = document.getElementById("recordBtn");
+videoSelectBtn.onclick = getVideoSources;
 
-document.querySelector('#min-btn').addEventListener('click', () => { minimizeWindow() });
-
+//Audio Abutton Logic
 document.querySelector('#audioBtn').addEventListener('click', () => {
     withAudio = !withAudio;
     var btn = document.getElementById('audioBtn');
     if (withAudio) {
         btn.classList.remove("audio-disable")
         btn.classList.add("audio")
-            // btn.className.replace(/\baudio\b/g, "audio")
         console.log("With Audio: " + withAudio)
     } else {
         btn.classList.remove("audio")
         btn.classList.add("audio-disable")
-            //btn.className.replace(/\baudio-disable\b/g, "audio-disable")
         console.log("Without Audio" + withAudio)
     }
 });
 
+//Record Button Logic
 recordBtnElem.onclick = e => {
     if (recording) {
         recordBtnElem.classList.remove('record-ing')
@@ -45,23 +43,7 @@ recordBtnElem.onclick = e => {
         mediaRecorder.start()
     }
 }
-document.querySelector('#cls-btn').addEventListener('click', () => { closeWindow() });
-document.querySelector('#gh').addEventListener('click', () => { shell.openExternal("https://github.com/GuruprasadDalvi") });
-document.querySelector('#ig').addEventListener('click', () => { shell.openExternal("https://github.com/GuruprasadDalvi") });
-document.querySelector('#ln').addEventListener('click', () => { shell.openExternal("https://www.linkedin.com/in/guruprasad-dalvi-b0727b109/") });
 
-
-function closeWindow() {
-    var window = remote.getCurrentWindow();
-    console.log("Close Window");
-    window.close();
-}
-
-function minimizeWindow() {
-    console.log("Minimise Window");
-    var window = remote.getCurrentWindow();
-    window.minimize();
-}
 //Get all avilabe screens on users machine
 async function getVideoSources() {
     const inputSources = await desktopCapturer.getSources({
@@ -84,7 +66,7 @@ async function getVideoSources() {
 
 async function selectSource(source) {
 
-    videoSelectBtn.innerText = "Selected Screen: " + source.name;
+    videoSelectBtn.innerHTML = "Selected Screen: " + source.name;
     const constraints = {
         audio: withAudio,
         video: {
@@ -101,7 +83,6 @@ async function selectSource(source) {
 
 
     // Create the Media Recorder
-    const options = { mimeType: 'video/webm; codecs=vp9' };
     mediaRecorder = new MediaRecorder(stream, options);
 
     // Register Event Handlers
@@ -120,18 +101,18 @@ function handleDataAvailable(e) {
 // Saves the video file on stop
 async function handleStop(e) {
     const blob = new Blob(recordedChunks, {
-        type: 'video/webm; codecs=vp9'
+        type: 'video/mp4'
     });
 
     const buffer = Buffer.from(await blob.arrayBuffer());
 
     const { filePath } = await dialog.showSaveDialog({
         buttonLabel: 'Save video',
-        defaultPath: `vid-${Date.now()}.webm`
+        defaultPath: `vid-${Date.now()}.mp4`
     });
 
     if (filePath) {
         writeFile(filePath, buffer, () => console.log('video saved successfully!'));
     }
-
+    recordedChunks = []
 }

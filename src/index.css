@@ -8,6 +8,7 @@ body {
 .main_container {
     border-radius: 15px;
     font-size: xx-large;
+    background-image: url("assets/bg.png");
     background-color: #001a49;
 }
 
