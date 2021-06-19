@@ -12,6 +12,7 @@ function minimizeWindow() {
     window.minimize();
 }
 
+//Minimising and Closing window
 document.querySelector('#min-btn').addEventListener('click', () => { minimizeWindow() });
 document.querySelector('#cls-btn').addEventListener('click', () => { closeWindow() });
 
