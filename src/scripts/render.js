@@ -9,23 +9,28 @@ const videoSelectBtn = document.getElementById('videoSelectBtn');
 var withAudio = false;
 var recording = false;
 let mediaRecorder;
-const options = { mimeType: 'video/webm; codecs=vp9' };
+const options = {
+    audioBitsPerSecond: 128000,
+    videoBitsPerSecond: 6000000,
+    mimeType: 'video/webm; codecs=vp9'
+};
 let recordedChunks = [];
 const recordBtnElem = document.getElementById("recordBtn");
 videoSelectBtn.onclick = getVideoSources;
 
 //Audio Abutton Logic
 document.querySelector('#audioBtn').addEventListener('click', () => {
-    withAudio = !withAudio;
     var btn = document.getElementById('audioBtn');
     if (withAudio) {
         btn.classList.remove("audio-disable")
         btn.classList.add("audio")
         console.log("With Audio: " + withAudio)
+        withAudio = false;
     } else {
         btn.classList.remove("audio")
         btn.classList.add("audio-disable")
         console.log("Without Audio" + withAudio)
+        withAudio = true;
     }
 });
 
@@ -67,8 +72,14 @@ async function getVideoSources() {
 async function selectSource(source) {
 
     videoSelectBtn.innerHTML = "Selected Screen: " + source.name;
-    const constraints = {
-        audio: withAudio,
+
+    //Check if user wants audio
+    let constraints = {
+        audio: {
+            mandatory: {
+                chromeMediaSource: 'desktop'
+            }
+        },
         video: {
             mandatory: {
                 chromeMediaSource: 'desktop',
@@ -77,6 +88,18 @@ async function selectSource(source) {
         }
     };
 
+    if (withAudio) {
+        constraints = {
+            audio: false,
+            video: {
+                mandatory: {
+                    chromeMediaSource: 'desktop',
+                    chromeMediaSourceId: source.id
+                }
+            }
+        };
+    }
+    console.log(constraints);
     // Create a Stream
     const stream = await navigator.mediaDevices
         .getUserMedia(constraints);
